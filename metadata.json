@@ -1,0 +1,5 @@
+{
+  "name": "Copy of AI 视频描述词生成器",
+  "description": "一个根据用户上传的图片或描述，利用 AI 生成符合平台标准、具有视觉冲击力的视频描述词的应用程序。",
+  "requestFramePermissions": []
+}
