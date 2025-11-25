@@ -112,6 +112,8 @@ export const cameraTechniques = [
   { id: 'handheld', name: '手持 (Handheld Shot)' },
   { id: 'whip_pan', name: '甩镜 (Whip Pan)' },
   { id: 'crash_zoom', name: '变焦爆发 (Crash Zoom)' },
+  { id: 'drone', name: '无人机镜头 / 航拍 (Drone / Aerial)' },
+  { id: 'timelapse_slowmo', name: '延时摄影 / 慢动作 (Timelapse / Slow Motion)' },
 ];
 
 
