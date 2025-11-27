@@ -217,7 +217,7 @@ In the **【设计思路 (Design Concept)】** section of your output, you **MUS
         currentStage = 2;
         onProgress(currentStage, 'in-progress');
         const response: GenerateContentResponse = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-pro-preview',
             contents: { parts: parts },
             config: { 
                 systemInstruction,
@@ -270,7 +270,7 @@ Description: ${style.description}
 
     try {
         const response: GenerateContentResponse = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-pro-preview',
             contents: { parts: [{ text: prompt }] },
             config: {
               systemInstruction,
