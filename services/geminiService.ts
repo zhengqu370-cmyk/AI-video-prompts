@@ -157,10 +157,30 @@ export const generateDescription = async (
         };
         
         let stylePrompt;
-        const processVerb = isTransitionMode ? "变换过程 (Transformation)" : "动态效果 (Dynamics)";
         
         if (style === 'custom' && customStyleText) {
-            stylePrompt = `\n**USER STYLE Input:** Custom Style - "${customStyleText}". Please deeply analyze and apply this style.`;
+            stylePrompt = `
+**USER STYLE INPUT: CUSTOM STYLE - "${customStyleText}"**
+
+**CRITICAL INSTRUCTION FOR CUSTOM STYLE PROCESSING:**
+You must strictly follow this Decision Tree to handle the user's custom style input:
+
+**Step 1: Complexity Analysis**
+Determine if the input is a Single Concept (e.g., "Sketch") or a Multi-Concept/Combo (e.g., "Cyberpunk + Wong Kar-wai", "Harry Potter + Iron Man").
+
+**Step 2: Execute Strategy**
+*   **Branch A: Single Style Input** -> Execute "Unity of Form and Function"
+    *   **Hard Style (Visual/Technical)** (e.g., Pixel Art, Sketch, Product Shot): Act as a **Tool**. 100% visual fidelity. DO NOT add extra narrative or mood. Keep it pure.
+    *   **Soft Style (Atmospheric)** (e.g., Cyberpunk, Noir, Ghibli): Act as a **Director**. Recreate visuals AND call upon narrative logic to supplement the atmosphere (e.g., rain, loneliness).
+*   **Branch B: Multi/Conflict/IP Input** -> Execute "Style Alchemy"
+    *   **Scenario 1: Homologous Superposition** (e.g., "Inception + Nolan"): Reinforce. Extract common core, increase weight.
+    *   **Scenario 2: Skin & Soul** (e.g., "Cyberpunk + Wong Kar-wai"): Nesting. Use the former for Environment/Color, the latter for Camera/Mood.
+    *   **Scenario 3: Clash of Titans** (e.g., "Wes Anderson + Tarantino"): Dialectic Unity. Maintain one's formal aesthetics, inject the other's core content.
+    *   **Scenario 4: IP Resonance/Mashup** (e.g., "Harry Potter + Iron Man", "Totoro + Godzilla"): **Extract Visual Anchors**. Do not analyze industrial parameters. Directly extract the most classic visual symbols from mass cognition. Find the common ground in emotion or worldview. If incompatible, Mix & Match (e.g., Magic-driven mechanical armor).
+
+**Step 3: Output Feedback**
+In the **【设计思路 (Design Concept)】** section of your output, you **MUST** explicitly state your judgment: "Identified as [Strategy Name] (e.g., IP Mashup), I extracted [Elements] from A and [Elements] from B to fuse..."
+`;
         } else {
             const styleName = styleMapping[style] || 'Auto-Detect';
             stylePrompt = `\n**USER STYLE Selection:** ${styleName}.`;
@@ -171,7 +191,6 @@ export const generateDescription = async (
           const techniqueNames = cameraTechniques.map(techId => cameraTechniqueMapping[techId] || techId).join(', ');
           cameraPrompt = `\n**USER CAMERA Selection:** [${techniqueNames}]. \nIntegrate these camera movements naturally into the prompt.`;
 
-          // Special handling logic is now reinforced by the System Instruction Layer 2, but specific notes here help context.
           if (cameraTechniques.includes('drone')) {
              cameraPrompt += `\n*Note: User specifically requested 'Drone/Aerial'. Ensure a high, wide, macro perspective.*`;
           }
